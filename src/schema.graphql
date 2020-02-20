@@ -1,0 +1,681 @@
+####################################################
+#### Query ####
+
+type Query {
+  #### Apple Music ####
+
+  # Storefronts
+  appleMusicStorefronts(
+    input: AppleMusicStorefrontsInput!
+  ): AppleMusicStorefrontResponse
+
+  appleMusicAllStorefronts(
+    input: AppleMusicAllStorefrontsInput!
+  ): AppleMusicStorefrontResponse
+
+  # Search
+  appleMusicSearch(input: AppleMusicSearchInput!): AppleMusicSearchResponse
+
+  appleMusicSearchHints(
+    input: AppleMusicSearchInput!
+  ): AppleMusicSearchHintsResponse
+
+  # Charts
+  appleMusicCharts(input: AppleMusicChartInput!): AppleMusicChartResponse
+
+  # Resources
+  appleMusicPlaylists(
+    input: AppleMusicResourceInput!
+  ): AppleMusicPlaylistResponse
+
+  appleMusicCurators(input: AppleMusicResourceInput!): AppleMusicCuratorResponse
+
+  appleMusicAppleCurators(
+    input: AppleMusicResourceInput!
+  ): AppleMusicCuratorResponse
+
+  appleMusicAlbums(input: AppleMusicResourceInput!): AppleMusicAlbumResponse
+
+  appleMusicArtists(input: AppleMusicResourceInput!): AppleMusicArtistResponse
+
+  appleMusicSongs(input: AppleMusicResourceInput!): AppleMusicSongResponse
+
+  appleMusicMusicVideos(
+    input: AppleMusicResourceInput!
+  ): AppleMusicMusicVideoResponse
+
+  appleMusicStations(input: AppleMusicResourceInput!): AppleMusicStationResponse
+
+  # appleMusicActivities(input: AppleMusicResourceInput): AppleMusicActivityResponse
+
+  appleMusicGenres(input: AppleMusicResourceInput!): AppleMusicGenreResponse
+
+  appleMusicTopGenres(
+    input: AppleMusicResourcePaginationInput!
+  ): AppleMusicGenreResponse
+
+  # Relationships
+  appleMusicPlaylistRelationship(
+    input: AppleMusicRelationshipInput!
+  ): AppleMusicResourceResponse
+
+  appleMusicAlbumRelationship(
+    input: AppleMusicRelationshipInput!
+  ): AppleMusicResourceResponse
+
+  appleMusicArtistRelationship(
+    input: AppleMusicRelationshipInput!
+  ): AppleMusicResourceResponse
+
+  appleMusicSongRelationship(
+    input: AppleMusicRelationshipInput!
+  ): AppleMusicResourceResponse
+
+  appleMusicMusicVideoRelationship(
+    input: AppleMusicRelationshipInput!
+  ): AppleMusicResourceResponse
+
+  appleMusicCuratorRelationship(
+    input: AppleMusicRelationshipInput!
+  ): AppleMusicResourceResponse
+
+  appleMusicAppleCuratorRelationship(
+    input: AppleMusicRelationshipInput!
+  ): AppleMusicResourceResponse
+
+  # appleMusicActivityRelationship(input: AppleMusicRelationshipInput): AppleMusicResourceResponse
+}
+
+####################################################
+
+union AppleMusicTrack = AppleMusicSong | AppleMusicMusicVideo
+
+union AppleMusicResource =
+    AppleMusicAlbum
+  | AppleMusicArtist
+  | AppleMusicSong
+  | AppleMusicMusicVideo
+  | AppleMusicPlaylist
+  | AppleMusicStation
+  | AppleMusicGenre
+  | AppleMusicCurator
+  | AppleMusicAppleCurator # | AppleMusicActivity
+####################################################
+
+input AppleMusicStorefrontsInput {
+  ids: [String!]!
+  l: String
+}
+
+input AppleMusicAllStorefrontsInput {
+  l: String
+}
+
+input AppleMusicChartInput {
+  storefront: String!
+  types: [String!]!
+  l: String
+  chart: String
+  genre: String
+  limit: Int
+  offset: Int
+}
+
+input AppleMusicSearchInput {
+  storefront: String!
+  term: String!
+  l: String
+  limit: Int
+  offset: String
+  types: [String!]
+}
+
+input AppleMusicResourceInput {
+  ids: [String!]!
+  storefront: String!
+  include: [String!]
+  l: String
+}
+
+input AppleMusicResourcePaginationInput {
+  storefront: String!
+  l: String
+  limit: Int
+  offset: String
+}
+
+input AppleMusicRelationshipInput {
+  id: String!
+  relationship: String!
+  storefront: String!
+  l: String
+  limit: Int
+}
+
+####################################################
+
+type AppleMusicSearchResponse {
+  results: AppleMusicSearchResults
+}
+
+type AppleMusicSearchResults {
+  appleCurators: AppleMusicAppleCuratorResponse
+
+  curators: AppleMusicCuratorResponse
+
+  playlists: AppleMusicPlaylistResponse
+
+  albums: AppleMusicAlbumResponse
+
+  artists: AppleMusicArtistResponse
+
+  musicVideos: AppleMusicMusicVideoResponse
+
+  songs: AppleMusicSongResponse
+
+  stations: AppleMusicStationResponse
+}
+
+type AppleMusicSearchHintsResponse {
+  results: AppleMusicSearchHints
+}
+
+type AppleMusicSearchHints {
+  terms: [String!]
+}
+
+####################################################
+
+type AppleMusicStorefrontResponse {
+  data: [AppleMusicStorefront!]
+}
+
+type AppleMusicResourceResponse {
+  data: [AppleMusicResource!]
+}
+
+type AppleMusicChartResponse {
+  albums: [AppleMusicChart!]
+
+  musicVideos: [AppleMusicChart!]
+
+  songs: [AppleMusicChart!]
+
+  playlists: [AppleMusicChart!]
+}
+
+type AppleMusicAlbumResponse {
+  data: [AppleMusicAlbum!]
+}
+
+type AppleMusicArtistResponse {
+  data: [AppleMusicArtist!]
+}
+
+type AppleMusicSongResponse {
+  data: [AppleMusicSong!]
+}
+
+type AppleMusicMusicVideoResponse {
+  data: [AppleMusicMusicVideo!]
+}
+
+type AppleMusicPlaylistResponse {
+  data: [AppleMusicPlaylist!]
+}
+
+type AppleMusicStationResponse {
+  data: [AppleMusicStation!]
+}
+
+type AppleMusicGenreResponse {
+  data: [AppleMusicGenre!]
+}
+
+type AppleMusicCuratorResponse {
+  data: [AppleMusicCurator!]
+}
+
+type AppleMusicAppleCuratorResponse {
+  data: [AppleMusicAppleCurator!]
+}
+
+####################################################
+
+type AppleMusicStorefront {
+  id: ID!
+
+  attributes: AppleMusicStorefrontAttributes
+
+  type: String!
+}
+
+type AppleMusicStorefrontAttributes {
+  defaultLanguageTag: String
+
+  name: String
+
+  supportedLanguageTags: [String!]
+}
+
+####################################################
+
+type AppleMusicChart {
+  name: String
+
+  chart: String!
+
+  href: String
+
+  next: String
+
+  data: [AppleMusicResource!]
+}
+
+####################################################
+
+type AppleMusicPlaylist {
+  id: ID!
+
+  attributes: AppleMusicPlaylistAttributes
+
+  relationships: AppleMusicPlaylistRelationships
+
+  type: String!
+}
+
+type AppleMusicPlaylistAttributes {
+  artwork: AppleMusicArtwork
+
+  curatorName: String
+
+  description: AppleMusicEditorialNotes
+
+  lastModifiedDate: String
+
+  name: String
+
+  playParams: AppleMusicPlayParameters
+
+  playlistType: String
+
+  url: String
+}
+
+type AppleMusicPlaylistRelationships {
+  curator: AppleMusicCuratorRelationship
+
+  tracks: AppleMusicTrackRelationship
+}
+
+####################################################
+
+type AppleMusicCurator {
+  id: ID!
+
+  attributes: AppleMusicCuratorAttributes
+
+  relationships: AppleMusicCuratorRelationships
+
+  type: String!
+}
+
+type AppleMusicCuratorAttributes {
+  artwork: AppleMusicArtwork
+
+  editorialNotes: AppleMusicEditorialNotes
+
+  name: String
+
+  url: String
+}
+
+type AppleMusicCuratorRelationships {
+  playlists: AppleMusicPlaylistRelationship
+}
+
+####################################################
+
+type AppleMusicAppleCurator {
+  id: ID!
+
+  attributes: AppleMusicAppleCuratorAttributes
+
+  relationships: AppleMusicAppleCuratorRelationships
+
+  type: String!
+}
+
+type AppleMusicAppleCuratorAttributes {
+  artwork: AppleMusicArtwork
+
+  editorialNotes: AppleMusicEditorialNotes
+
+  name: String
+
+  url: String
+}
+
+type AppleMusicAppleCuratorRelationships {
+  playlists: AppleMusicPlaylistRelationship
+}
+
+####################################################
+
+type AppleMusicAlbum {
+  id: ID!
+
+  attributes: AppleMusicAlbumAttributes
+
+  relationships: AppleMusicAlbumRelationships
+
+  type: String!
+}
+
+type AppleMusicAlbumAttributes {
+  artistName: String
+
+  artwork: AppleMusicArtwork
+
+  contentRating: String
+
+  copyright: String
+
+  editorialNotes: AppleMusicEditorialNotes
+
+  genreNames: [String!]
+
+  isComplete: Boolean
+
+  isSingle: Boolean
+
+  name: String
+
+  playParams: AppleMusicPlayParameters
+
+  recordLabel: String
+
+  releaseDate: String
+
+  trackCount: Int
+
+  url: String
+
+  isMasteredForItunes: Boolean
+}
+
+type AppleMusicAlbumRelationships {
+  artists: AppleMusicArtistRelationship
+
+  genres: AppleMusicGenreRelationship
+
+  tracks: AppleMusicTrackRelationship
+}
+
+####################################################
+
+type AppleMusicArtist {
+  id: ID!
+
+  attributes: AppleMusicArtistAttributes
+
+  relationships: AppleMusicArtistRelationships
+
+  type: String!
+}
+
+type AppleMusicArtistAttributes {
+  editorialNotes: AppleMusicEditorialNotes
+
+  genreNames: [String!]
+
+  name: String
+
+  url: String
+}
+
+type AppleMusicArtistRelationships {
+  albums: AppleMusicAlbumRelationship
+
+  genres: AppleMusicGenreRelationship
+
+  musicVideos: AppleMusicMusicVideoRelationship
+
+  playlists: AppleMusicPlaylistRelationship
+
+  station: AppleMusicStationRelationship
+}
+
+####################################################
+
+type AppleMusicSong {
+  id: ID!
+
+  attributes: AppleMusicSongAttributes
+
+  relationships: AppleMusicSongRelationships
+
+  type: String!
+}
+
+type AppleMusicSongAttributes {
+  albumName: String
+
+  artistName: String
+
+  artwork: AppleMusicArtwork
+
+  composerName: String
+
+  contentRating: String
+
+  discNumber: Int
+
+  durationInMillis: Int
+
+  editorialNotes: AppleMusicEditorialNotes
+
+  genreNames: [String!]
+
+  isrc: String
+
+  movementCount: Int
+
+  movementName: String
+
+  movementNumber: Int
+
+  name: String!
+
+  playParams: AppleMusicPlayParameters
+
+  previews: [AppleMusicPreview!]
+
+  releaseDate: String
+
+  trackNumber: Int
+
+  url: String
+
+  workName: String
+}
+
+type AppleMusicSongRelationships {
+  albums: AppleMusicAlbumRelationship
+
+  artists: AppleMusicArtistRelationship
+
+  genres: AppleMusicGenreRelationship
+
+  station: AppleMusicStationRelationship
+}
+
+####################################################
+
+type AppleMusicMusicVideo {
+  id: ID!
+
+  attributes: AppleMusicMusicVideoAttributes
+
+  relationships: AppleMusicMusicVideoRelationships
+
+  type: String!
+}
+
+type AppleMusicMusicVideoAttributes {
+  albumName: String
+
+  artistName: String
+
+  artwork: AppleMusicArtwork
+
+  contentRating: String
+
+  durationInMillis: Int
+
+  editorialNotes: AppleMusicEditorialNotes
+
+  genreNames: [String!]
+
+  isrc: String
+
+  name: String
+
+  playParams: AppleMusicPlayParameters
+
+  previews: [AppleMusicPreview!]
+
+  releaseDate: String
+
+  trackNumber: Int
+
+  url: String
+
+  videoSubType: String
+
+  hasHDR: Boolean
+
+  has4K: Boolean
+}
+
+type AppleMusicMusicVideoRelationships {
+  albums: AppleMusicAlbumRelationship
+
+  artists: AppleMusicArtistRelationship
+
+  genres: AppleMusicGenreRelationship
+}
+
+####################################################
+
+type AppleMusicStation {
+  id: ID!
+
+  attributes: AppleMusicStationAttributes
+
+  type: String!
+}
+
+type AppleMusicStationAttributes {
+  artwork: AppleMusicArtwork
+
+  durationInMillis: Int
+
+  editorialNotes: AppleMusicEditorialNotes
+
+  episodeNumber: Int
+
+  isLive: Boolean
+
+  name: String
+
+  url: String
+}
+
+####################################################
+
+type AppleMusicGenre {
+  id: ID!
+
+  attributes: AppleMusicGenreAttributes
+
+  type: String!
+}
+
+type AppleMusicGenreAttributes {
+  name: String
+}
+
+####################################################
+
+type AppleMusicAlbumRelationship {
+  data: [AppleMusicAlbum!]
+}
+
+type AppleMusicArtistRelationship {
+  data: [AppleMusicArtist!]
+}
+
+type AppleMusicGenreRelationship {
+  data: [AppleMusicGenre!]
+}
+
+type AppleMusicTrackRelationship {
+  data: [AppleMusicTrack!]
+}
+
+type AppleMusicStationRelationship {
+  data: AppleMusicStation
+}
+
+type AppleMusicMusicVideoRelationship {
+  data: [AppleMusicMusicVideo!]
+}
+
+type AppleMusicPlaylistRelationship {
+  data: [AppleMusicPlaylist!]
+}
+
+type AppleMusicCuratorRelationship {
+  data: [AppleMusicCurator!]
+}
+
+####################################################
+
+type AppleMusicArtwork {
+  bgColor: String
+
+  height: Int
+
+  width: Int
+
+  textColor1: String
+
+  textColor2: String
+
+  textColor3: String
+
+  textColor4: String
+
+  url: String
+}
+
+type AppleMusicEditorialNotes {
+  short: String
+
+  standard: String
+}
+
+type AppleMusicPlayParameters {
+  id: String
+
+  kind: String
+}
+
+type AppleMusicPreview {
+  artwork: AppleMusicArtwork
+
+  url: String
+
+  hlsUrl: String
+}
