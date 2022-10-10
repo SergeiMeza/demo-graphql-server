@@ -22,7 +22,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.11",
     "mime-types": "^2.1.24",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "nanoid": "^2.0.1",
     "nanoid-dictionary": "^2.0.0",
     "saslprep": "^1.0.3",
