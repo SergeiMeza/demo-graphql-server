@@ -20,7 +20,7 @@
     "express": "^4.17.1",
     "graphql": "latest",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "mime-types": "^2.1.24",
     "moment": "^2.29.4",
     "nanoid": "^2.0.1",
